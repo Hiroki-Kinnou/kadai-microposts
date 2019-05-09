@@ -9,10 +9,11 @@
         <div>
           <p class="mb-0"><%= micropost.content %></p>
         </div>
-        <div>
+        <div style="display:inline-flex">
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { cofirm: "You sure" }, class: 'btn btn-danger btn-sm' %>
-          <% end %>  
+          <% end %>
+          <%= render 'likerelations/like_button', micropost: micropost %>
         </div>
       </div>
     </li>
