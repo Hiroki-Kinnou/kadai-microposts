@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
   
   def index
-    @users = User.order(id: :desc).page(params[:page]).per(10)
+    @users = User.search(params[:search]).paginate(page: params[:page])
   end
 
   def show
@@ -44,6 +44,10 @@ class UsersController < ApplicationController
     @microposts = @user.likings.page(params[:page])
     counts(@user)
     render :show
+  end
+  
+  def search
+    @users = User.search(params[:search])
   end
   
   private
